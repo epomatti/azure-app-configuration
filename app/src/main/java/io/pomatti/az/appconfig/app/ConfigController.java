@@ -27,16 +27,11 @@ public class ConfigController {
     return value;
   }
 
-  @GetMapping("/config")
-  public ResponseEntity<Config> getConfig() {
-    return ResponseEntity.ok(config);
-  }
-
   @GetMapping("/refresh")
-  public ResponseEntity<Config> refresh() throws Exception {
+  public ResponseEntity<Object> refresh() throws Exception {
     if (refresh != null) {
       refresh.refreshConfigurations();
-      return ResponseEntity.ok(config);
+      return ResponseEntity.ok().build();
     }
     throw new Exception("It was not possible to refresh");
   }

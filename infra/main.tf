@@ -55,7 +55,7 @@ resource "azurerm_role_assignment" "appconf_dataowner" {
 resource "azurerm_app_configuration_key" "message" {
   configuration_store_id = azurerm_app_configuration.appconf.id
   key                    = "/application/config.message"
-  value                  = "Hello from App Configuration"
+  value                  = "Hello!"
   locked                 = false
 
   lifecycle {
@@ -71,9 +71,8 @@ resource "azurerm_app_configuration_key" "message" {
 
 resource "azurerm_app_configuration_feature" "demo" {
   configuration_store_id = azurerm_app_configuration.appconf.id
-  description            = "Checks if demo access is enabled in the environment."
-  name                   = "demo"
-  label                  = "demo"
+  description            = "Beta flag"
+  name                   = "Beta"
   enabled                = true
 
   lifecycle {
