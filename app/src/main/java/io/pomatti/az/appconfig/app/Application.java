@@ -7,27 +7,25 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping(value = "/config")
 @SpringBootApplication
 public class Application {
 
   Logger logger = LoggerFactory.getLogger(Application.class);
 
-  @Value("${azure.servicebus.connectionstring}")
+  // @Value("${azure.servicebus.connectionstring}")
   private String connectionString;
 
-  @Value("${azure.servicebus.prefetchCount}")
+  // @Value("${azure.servicebus.prefetchCount}")
   private Boolean demo;
 
   public static void main(String[] args) {
     SpringApplication.run(Application.class, args);
   }
 
-  @GetMapping("/")
+  @GetMapping("/config")
   public ResponseEntity<Config> get() {
     Config config = new Config();
 
