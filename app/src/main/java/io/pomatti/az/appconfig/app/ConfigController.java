@@ -1,5 +1,7 @@
 package io.pomatti.az.appconfig.app;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,6 +12,8 @@ import com.azure.spring.cloud.config.AppConfigurationRefresh;
 @RestController
 public class ConfigController {
 
+  Logger logger = LoggerFactory.getLogger(getClass());
+
   @Autowired
   Config config;
 
@@ -19,7 +23,7 @@ public class ConfigController {
   @GetMapping("/message")
   public String getMessage() {
     var value = config.getMessage();
-    System.out.println(value);
+    logger.info(value);
     return value;
   }
 
