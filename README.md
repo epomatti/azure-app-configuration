@@ -28,3 +28,4 @@ To run the application local values add `-Dspring-boot.run.profiles=dev`.
 ## Reference
 
 - [App Configuration Java Spring App](https://learn.microsoft.com/en-us/azure/azure-app-configuration/quickstart-java-spring-app)
+- [Microsoft Spring Boot App Configuration Docs](https://microsoft.github.io/spring-cloud-azure/docs/azure-app-configuration/2.8.0/reference/html/index.html)

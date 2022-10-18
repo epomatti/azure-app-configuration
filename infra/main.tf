@@ -52,11 +52,11 @@ resource "azurerm_role_assignment" "appconf_dataowner" {
   principal_id         = data.azurerm_client_config.current.object_id
 }
 
-resource "azurerm_app_configuration_key" "key1" {
+resource "azurerm_app_configuration_key" "message" {
   configuration_store_id = azurerm_app_configuration.appconf.id
-  key                    = "concurrentProcesses"
-  label                  = "Concurrent processes for the consumer"
-  value                  = "1000"
+  key                    = "/application/config.message"
+  label                  = "message"
+  value                  = "Hello from App Configuration"
   content_type           = "kv"
   locked                 = false
 
