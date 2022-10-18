@@ -42,3 +42,13 @@ resource "azurerm_app_configuration" "appconf" {
 
   purge_protection_enabled = false
 }
+
+### Output ###
+
+output "primary_read_key" {
+  value = azurerm_app_configuration.appconf.primary_read_key
+}
+
+output "primary_write_key" {
+  value = azurerm_app_configuration.appconf.primary_write_key
+}
