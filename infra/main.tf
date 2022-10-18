@@ -55,9 +55,7 @@ resource "azurerm_role_assignment" "appconf_dataowner" {
 resource "azurerm_app_configuration_key" "message" {
   configuration_store_id = azurerm_app_configuration.appconf.id
   key                    = "/application/config.message"
-  label                  = "message"
   value                  = "Hello from App Configuration"
-  content_type           = "kv"
   locked                 = false
 
   lifecycle {
