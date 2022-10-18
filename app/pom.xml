@@ -38,7 +38,7 @@
     </dependency>
     <dependency>
       <groupId>com.azure.spring</groupId>
-      <artifactId>azure-spring-cloud-appconfiguration-config-web</artifactId>
+      <artifactId>azure-spring-cloud-appconfiguration-config</artifactId>
       <version>2.9.0</version>
     </dependency>
     <dependency>

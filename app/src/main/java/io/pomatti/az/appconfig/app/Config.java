@@ -7,9 +7,17 @@ import lombok.Data;
 
 @Configuration
 @ConfigurationProperties(prefix = "config")
-@Data
+// @Data
 public class Config {
 
   private String message;
+
+  public String getMessage() {
+      return message;
+  }
+
+  public void setMessage(String message) {
+      this.message = message;
+  }
 
 }
