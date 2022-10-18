@@ -1,0 +1,9 @@
+{
+  "properties": [
+    {
+      "name": "spring.cloud.azure.appconfiguration.stores[0].connection-string",
+      "type": "java.lang.String",
+      "description": "Azure App Configuration connection string"
+    }
+  ]
+}
