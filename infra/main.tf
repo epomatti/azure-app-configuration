@@ -43,6 +43,37 @@ resource "azurerm_app_configuration" "appconf" {
   purge_protection_enabled = false
 }
 
+### App Configuration Keys ###
+
+data "azurerm_client_config" "current" {}
+
+resource "azurerm_role_assignment" "appconf_dataowner" {
+  scope                = azurerm_app_configuration.appconf.id
+  role_definition_name = "App Configuration Data Owner"
+  principal_id         = data.azurerm_client_config.current.object_id
+}
+
+resource "azurerm_app_configuration_key" "key1" {
+  configuration_store_id = azurerm_app_configuration.appconf.id
+  key                    = "concurrentProcesses"
+  label                  = "Concurrent processes for the consumer"
+  value                  = "1000"
+  content_type           = "kv"
+  locked                 = false
+
+  depends_on = [
+    azurerm_role_assignment.appconf_dataowner
+  ]
+}
+
+resource "azurerm_app_configuration_feature" "demo" {
+  configuration_store_id = azurerm_app_configuration.appconf.id
+  description            = "Checks if demo access is enabled in the environment."
+  name                   = "demo"
+  label                  = "demo"
+  enabled                = true
+}
+
 ### Output ###
 
 output "primary_read_key" {
