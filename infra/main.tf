@@ -37,9 +37,8 @@ resource "azurerm_app_configuration" "appconf" {
   resource_group_name = azurerm_resource_group.default.name
   location            = azurerm_resource_group.default.location
 
-  sku                   = "free"
-  public_network_access = "Enabled"
-
+  sku                      = "free"
+  public_network_access    = "Enabled"
   purge_protection_enabled = false
 }
 
@@ -61,6 +60,12 @@ resource "azurerm_app_configuration_key" "key1" {
   content_type           = "kv"
   locked                 = false
 
+  lifecycle {
+    ignore_changes = [
+      value, locked
+    ]
+  }
+
   depends_on = [
     azurerm_role_assignment.appconf_dataowner
   ]
@@ -72,6 +77,12 @@ resource "azurerm_app_configuration_feature" "demo" {
   name                   = "demo"
   label                  = "demo"
   enabled                = true
+
+  lifecycle {
+    ignore_changes = [
+      enabled
+    ]
+  }
 }
 
 ### Output ###
