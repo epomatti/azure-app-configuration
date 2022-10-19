@@ -52,6 +52,7 @@ resource "azurerm_role_assignment" "appconf_dataowner" {
   principal_id         = data.azurerm_client_config.current.object_id
 }
 
+
 resource "azurerm_app_configuration_key" "message" {
   configuration_store_id = azurerm_app_configuration.appconf.id
   key                    = "/application/config.message"
@@ -69,6 +70,23 @@ resource "azurerm_app_configuration_key" "message" {
   ]
 }
 
+resource "azurerm_app_configuration_key" "value1" {
+  configuration_store_id = azurerm_app_configuration.appconf.id
+  key                    = "/application/config.value1"
+  value                  = "7"
+
+  lifecycle {
+    ignore_changes = [
+      value, locked
+    ]
+  }
+
+  depends_on = [
+    azurerm_role_assignment.appconf_dataowner
+  ]
+}
+
+
 resource "azurerm_app_configuration_key" "sentinel" {
   configuration_store_id = azurerm_app_configuration.appconf.id
   key                    = "sentinel"
@@ -85,7 +103,9 @@ resource "azurerm_app_configuration_key" "sentinel" {
   ]
 }
 
-resource "azurerm_app_configuration_feature" "demo" {
+### Features ###
+
+resource "azurerm_app_configuration_feature" "beta" {
   configuration_store_id = azurerm_app_configuration.appconf.id
   description            = "Beta flag"
   name                   = "Beta"
