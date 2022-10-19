@@ -1,5 +1,9 @@
 # Azure App Configuration sandbox
 
+Sandbox with App Config.
+
+## Run
+
 Create the app configuration resource:
 
 ```sh
@@ -22,9 +26,24 @@ mvn clean package
 mvn spring-boot:run
 ```
 
+Check the parameter value:
+
+```sh
+curl localhost:8080/message
+```
+
+Change the message and then update the refresh trigger. Check the message again to see the update value.
+
 ```sh
 az appconfig kv set --key sentinel --value 2 --name <name-of-your-new-store> --yes
 ```
+
+This will use the Feature capability from the API:
+
+```sh
+curl localhost:8080/beta
+```
+
 
 ## Reference
 
