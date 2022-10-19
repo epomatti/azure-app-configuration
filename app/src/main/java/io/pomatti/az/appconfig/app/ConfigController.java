@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.azure.spring.cloud.config.AppConfigurationRefresh;
+import com.azure.spring.cloud.feature.manager.FeatureManager;
 
 @RestController
 public class ConfigController {
@@ -16,6 +17,9 @@ public class ConfigController {
 
   @Autowired
   Config config;
+
+  @Autowired
+  FeatureManager featureManager;
 
   @Autowired(required = false)
   private AppConfigurationRefresh refresh;
@@ -36,4 +40,10 @@ public class ConfigController {
     throw new Exception("It was not possible to refresh");
   }
 
+  @GetMapping("/beta")
+  public Boolean isBeta() {
+    var beta = featureManager.isEnabledAsync("Beta").block();
+    logger.info(beta.booleanValue() + "");
+    return beta;
+  }
 }

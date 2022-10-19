@@ -22,8 +22,9 @@ mvn clean package
 mvn spring-boot:run
 ```
 
-To run the application local values add `-Dspring-boot.run.profiles=dev`.
-
+```sh
+az appconfig kv set --key sentinel --value 2 --name <name-of-your-new-store> --yes
+```
 
 ## Reference
 

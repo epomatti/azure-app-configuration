@@ -69,6 +69,22 @@ resource "azurerm_app_configuration_key" "message" {
   ]
 }
 
+resource "azurerm_app_configuration_key" "sentinel" {
+  configuration_store_id = azurerm_app_configuration.appconf.id
+  key                    = "sentinel"
+  value                  = "1"
+
+  lifecycle {
+    ignore_changes = [
+      value, locked
+    ]
+  }
+
+  depends_on = [
+    azurerm_role_assignment.appconf_dataowner
+  ]
+}
+
 resource "azurerm_app_configuration_feature" "demo" {
   configuration_store_id = azurerm_app_configuration.appconf.id
   description            = "Beta flag"
